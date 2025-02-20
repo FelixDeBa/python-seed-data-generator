@@ -24,4 +24,6 @@ def uuid_list_gen(uuid_format:str="8-4-4-4-12", repeat:bool=False, quantity:int=
                 iter-=1
     return uuid_list
 
-print(uuid_list_gen(repeat=False, quantity=2))
+if __name__ == '__main__':
+    qty = random.randint(1,10)
+    print(uuid_list_gen(repeat=False, quantity=qty))
