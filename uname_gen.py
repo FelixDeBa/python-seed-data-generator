@@ -1,21 +1,24 @@
 import random
 
-def uname_gen(full_name:list, format:str="First:F::1,Second:S:opt:2,Third::3,Fourth:F:opt:4", canrepeat:bool=False):
+def uname_gen(name:str, format:str="First:F::1,Second:S:opt:2,Third:::3,Fourth:F:opt:4", name_separator:str=" ") -> str:
+    uname = ""
+    full_name = name.split(name_separator)
     positions = format.split(',')
-    for pos in positions:
-        param = pos.split(':')
-        if param[1] != "":
-            print(param)
-            print(param[1], param[0])
-            param_index = param[0].find(param[1])
-            print(param_index)
-            print(full_name[0][param_index], full_name[0], param[1], param[0])
-        else:
-            print(param)
+    print(positions)
+    for i, pos in enumerate(positions):
+        parameters = pos.split(':')
+        if parameters[2] != "opt":
+            if parameters[1] != "":
+                index = parameters[0].find(parameters[1])
+                uname+=f"{full_name[int(parameters[3])][index]}"
+            else:
+                uname+=f"{full_name[int(parameters[3])]}"
+    return uname
 
-    for name in full_name:
-        print(name)
-
+def uname_list_gen(full_names:list, quantity:int, canrepeat:bool=False, format:str="First:F::1,Second:S:opt:2,Third:::3,Fourth:F:opt:4", name_separator:str=" "):
+    for full_name in full_names:
+        print(full_name.split(name_separator))
 
 if __name__ == '__main__':
-    uname_gen(full_name=["Felix", "Delgadillo", "Barrios"])
+    un = uname_gen(name="Jose Eleuterio Gomez Morin")
+    print(un)
